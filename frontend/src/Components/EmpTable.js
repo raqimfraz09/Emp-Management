@@ -2,19 +2,22 @@ import React from 'react'
 import {Link} from 'react-router-dom';
 
 
-function EmpTable() {
+function EmpTable({
+    employees,
+    pagination
+    }) {
     const headers = ['Name', 'Email', 'Phone', 'Department', 'Actions' ];
 
     const TableRow = (employee) => {
         return <tr>
             <td>
                 <Link to={`/employee/id}`} className='text-decoration-none'>
-                    {"Raqim"}
+                    {employee.name}
                 </Link>
             </td>
-            <td>{"Raqim20@gmail.com"}</td>
-            <td>{"6299039814"}</td>
-            <td>{"IT"}</td>
+            <td>{employee.email}</td>
+            <td>{employee.phone}</td>
+            <td>{employee.department}</td>
             <td>
                 <i className='bi bi-pencil-fill text-warning md-4' role='button' data-bs-toggle="tooltip" data-bs-placement="top" 
                 onClick={() => {}}>
@@ -46,7 +49,12 @@ function EmpTable() {
             </thead>
 
             <tbody>
-                <TableRow/>
+                {
+                    employees.map((emp)=>(
+                        <TableRow key = {emp._id} employee = {emp}/>
+                    ))
+                }
+                
             </tbody>
 
         </table>
